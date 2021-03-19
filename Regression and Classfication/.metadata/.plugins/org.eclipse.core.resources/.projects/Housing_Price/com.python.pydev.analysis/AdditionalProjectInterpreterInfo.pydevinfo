@@ -1,0 +1,19 @@
+-- VERSION_5
+-- START DISKCACHE_2
+C:\Users\rampr\OneDrive\Documents\ML_Project\Regression\.metadata\.plugins\org.eclipse.core.resources\.projects\Housing_Price\com.python.pydev.analysis\v2_indexcache
+Housing|1567157275933972000|C:\Users\rampr\OneDrive\Documents\ML_Project\Regression\Housing_Price\Housing.py
+-- END DISKCACHE
+-- START DICTIONARY
+2
+1=C:\Users\rampr\OneDrive\Documents\ML_Project\Regression\Housing_Price\Housing.py
+2=Housing
+-- END DICTIONARY
+-- START TREE 1
+3
+dat|1|dataEncoding!1^21#5*18@
+ina|1|inAprenter!1^56#5*18@
+nul|2|nullElimination!1^46#5*18@nullMng!1^3#5*18@
+-- END TREE
+-- START TREE 2
+0
+-- END TREE

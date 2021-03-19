@@ -1,0 +1,20 @@
+-- VERSION_5
+-- START DISKCACHE_2
+C:\Users\rampr\OneDrive\Documents\ML_Project\Regression\.metadata\.plugins\org.eclipse.core.resources\.projects\ML_DL_Project\com.python.pydev.analysis\v2_indexcache
+ML_DL_Project|1559039705429295000|C:\Users\rampr\OneDrive\Documents\ML_Project\ML_DL_Project\ML_DL_Project.py
+-- END DISKCACHE
+-- START DICTIONARY
+2
+1=C:\Users\rampr\OneDrive\Documents\ML_Project\ML_DL_Project\ML_DL_Project.py
+2=ML_DL_Project
+-- END DICTIONARY
+-- START TREE 1
+4
+cla|1|classifier!1^12#1*19@
+res|1|result!1^83#1*19@
+tes|3|test_set!1^60#1*19@test_image!1^78#1*19@test_datagen!1^54#1*19@
+tra|2|train_datagen!1^53#1*19@training_set!1^57#1*19@
+-- END TREE
+-- START TREE 2
+0
+-- END TREE

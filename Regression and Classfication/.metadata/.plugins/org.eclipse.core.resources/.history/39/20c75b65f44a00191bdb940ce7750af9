@@ -1,0 +1,42 @@
+'''
+Created on 14 Mar 2019
+
+@author: rampr
+'''
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import roc_auc_score
+import pandas as pd
+from keras.engine.saving import load_model
+
+#json_file = open('model.json', 'r')
+#loaded_model_json = json_file.read()
+#json_file.close()
+#loaded_model = model_from_json(loaded_model_json)
+
+# load weights into new model
+
+#loaded_model.load_weights("model.h5")
+
+loaded_model=load_model('model.model')
+
+Data=pd.read_csv('santander-customer-transaction-prediction/test.csv')
+D=Data.drop(['ID_code'],'columns')
+X= MinMaxScaler().fit_transform(D.values[:,0:])
+#y=D.values[:,0]
+result = loaded_model.predict([X])
+#print(roc_auc_score(y, result))
+result=np.around(result)
+
+print(result)
+
+plt.hist(result)
+plt.show()
+print(result[:,0])
+submission = pd.DataFrame({'ID_code':Data['ID_code'],'target':result[:,0]})
+filename = 'Santander_Customer_Transaction_Prediction.csv'
+submission.to_csv(filename,index=False)
+
+print('Saved file: ' + filename)
+clf = load('filename.joblib') 

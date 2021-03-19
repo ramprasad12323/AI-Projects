@@ -1,0 +1,52 @@
+'''
+Created on 13 Mar 2019
+
+@author: rampr
+'''
+from keras.engine.saving import load_model
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import roc_auc_score
+
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from joblib import load
+import pandas as pd
+import numpy as np
+
+
+Data=pd.read_csv('santander-customer-transaction-prediction/test.csv')
+Data=Data.sample(frac=1).reset_index(drop=True)
+Data=Data.drop(['ID_code'],'columns')
+Data=Data[Data.target==1].append(Data[Data.target==0].head(20098))
+Data=Data.sample(frac=1).reset_index(drop=True)
+X= MinMaxScaler().fit_transform(Data.values)
+X=np.append(X,np.square(X), axis=1)
+
+print(X.shape,'\n')
+
+
+
+model1=load('model1.joblib')
+model2=load('model2.joblib')
+model3=load('model3.joblib')
+model4=load('model4.joblib')
+model5=load('model5.joblib')
+model6=load('model6.joblib')
+final=load_model('final.model')
+
+Xmp1=model1.predict(X).reshape(X.shape[0],1)
+Xmp1=np.append(Xmp1,model2.predict(X).reshape(Xmp1.shape[0],1), axis=1)
+Xmp1=np.append(Xmp1,model3.predict(X).reshape(Xmp1.shape[0],1), axis=1)
+Xmp1=np.append(Xmp1,model4.predict(X).reshape(Xmp1.shape[0],1), axis=1)
+Xmp1=np.append(Xmp1,model5.predict(X).reshape(Xmp1.shape[0],1), axis=1)
+Xmp1=np.append(Xmp1,model6.predict(X).reshape(Xmp1.shape[0],1), axis=1)
+
+Ypred=final.predict(Xmp1)
+Ypred=np.around(Ypred)
+
+print(Ypred[:,0])
+submission = pd.DataFrame({'ID_code':Data['ID_code'],'target':Ypred[:,0]})
+filename = 'Santander_Customer_Transaction_Prediction.csv'
+submission.to_csv(filename,index=False)
+
+print('Saved file: ' + filename)

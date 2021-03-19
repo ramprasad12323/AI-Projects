@@ -1,0 +1,13 @@
+'''
+Created on 29 Aug 2019
+
+@author: rampr
+'''
+def nullMng(Data,Null_values):
+    for i in range(Data.shape[1]-1):
+        if Data[Data.columns[i]].dtype=='O':
+            Data[Data.columns[i]][Data[Data.columns[i]].isnull()]='a'
+        else:
+            Data[Data.columns[i]][Data[Data.columns[i]].isnull()]=Data[Data.columns[i]].mean()
+    
+    

@@ -1,0 +1,43 @@
+'''
+Created on 29 Aug 2019
+
+@author: rampr
+'''
+import pandas as pd
+
+def nullMng(Data,Null_values='mean'):
+    for i in range(Data.shape[1]-1):
+        if Data[Data.columns[i]].dtype=='O':
+            Data[Data.columns[i]][Data[Data.columns[i]].isnull()]='012789'
+        else:
+            if Null_values=='mean':
+                Data[Data.columns[i]][Data[Data.columns[i]].isnull()]=Data[Data.columns[i]].mean()
+            elif Null_values=='mode':
+                Data[Data.columns[i]][Data[Data.columns[i]].isnull()]=Data[Data.columns[i]].mode()
+            elif Null_values=='median':
+                Data[Data.columns[i]][Data[Data.columns[i]].isnull()]=Data[Data.columns[i]].median()
+            else:
+                Data[Data.columns[i]][Data[Data.columns[i]].isnull()]=Null_values
+    Data=Data.dropna()
+    return Data
+                
+            
+
+def dataEncoding(Data):
+   Damies=None
+   for i in range(Data.shape[1]-1):
+       if Data[Data.columns[i]].dtype=='O':
+           dum=pd.get_dummies(data=Data[Data.columns[i]])
+           if 'a' in dum.columns:
+               dum=dum.drop(['a'],'columns')
+            else:
+                dum=dum.drop(dum.columns[0],'columns')
+        Damies =pd.concat([Damies,dum],axis=1)
+    i=0
+    while(i<Data.shape[1]-1):
+        if Data[Data.columns[i]].dtype=='O':
+            Data=Data.drop(Data.columns[i],'columns')
+            i=i-1
+        i=i+1
+    
+            
